@@ -1,0 +1,2 @@
+[console_scripts]
+agriops-demo = agriops.generate:main

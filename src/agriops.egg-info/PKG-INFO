@@ -1,0 +1,52 @@
+Metadata-Version: 2.4
+Name: agriops
+Version: 0.1.0
+Summary: AgriTech operations data pipeline: field events, contractor compliance, biosecurity declarations and warehouse models.
+License: MIT
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: fastapi>=0.115
+Requires-Dist: uvicorn>=0.30
+Requires-Dist: pydantic>=2.8
+Requires-Dist: duckdb>=1.1
+Provides-Extra: dev
+Requires-Dist: pytest>=8; extra == "dev"
+Requires-Dist: httpx>=0.27; extra == "dev"
+Dynamic: license-file
+
+# agri-ops-data-pipeline
+
+[![ci](https://github.com/itsoumya-d/agri-ops-data-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/itsoumya-d/agri-ops-data-pipeline/actions/workflows/ci.yml)
+
+A tested reference for the data workflow behind an agri-tech operations
+platform:
+
+- Field events: check-ins, check-outs, inductions, hazards and biosecurity
+  declarations.
+- Validation and deduplication by event ID.
+- Compliance enrichment: missing induction, missing/expired biosecurity
+  declaration, visitor risk, high-severity hazards.
+- DuckDB warehouse models: site activity, contractor compliance and hazard
+  trends.
+- Data-quality checks: uniqueness, accepted values and relationships.
+- FastAPI ingest/metrics surface and synthetic demo data.
+
+This is a **reference implementation**, not a claim of production AWS or
+agri-tech experience. The AWS-shaped adapters are local; no live S3, SQS,
+EventBridge, Lambda or DynamoDB is used in CI.
+
+## Run
+
+```bash
+uv venv --python 3.12
+source .venv/bin/activate
+pip install -e ".[dev]"
+pytest
+uvicorn agriops.api:app --reload
+python -m agriops.generate
+```
+
+## License
+
+MIT

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agriops"
+version = "0.1.0"
+description = "AgriTech operations data pipeline: field events, contractor compliance, biosecurity declarations and warehouse models."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = ["fastapi>=0.115", "uvicorn>=0.30", "pydantic>=2.8", "duckdb>=1.1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[project.scripts]
+agriops-demo = "agriops.generate:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+addopts = "-q"
